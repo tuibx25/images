@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 19: Thế năng điện</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+            background: #f0f7ff;
+            padding: 25px 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .lesson-card {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 30px 50px -20px #0b2b5c;
+            padding: 45px 50px;
+            line-height: 1.4; /* Giảm từ 1.7 xuống 1.4 */
+            color: #03223f;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #00356b;
+            border-left: 14px solid #256ef0;
+            padding-left: 25px;
+            margin: 0 0 10px 0; /* Giảm margin-bottom từ 15px xuống 10px */
+        }
+        .subhead {
+            font-size: 1.35rem;
+            color: #0f4a81;
+            background: #def0ff;
+            padding: 10px 30px; /* Giảm padding từ 12px 32px */
+            border-radius: 60px;
+            display: inline-block;
+            margin-bottom: 20px; /* Giảm từ 30px xuống 20px */
+            font-weight: 500;
+            box-shadow: 0 4px 12px #c3dbfa;
+        }
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 650;
+            color: #0b4b74;
+            border-bottom: 5px solid #a6cbff;
+            padding-bottom: 8px; /* Giảm từ 12px xuống 8px */
+            margin: 30px 0 15px 0; /* Giảm margin */
+        }
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e63c0;
+            margin: 20px 0 10px 0; /* Giảm margin */
+        }
+        .image-container {
+            background: #f8fcff;
+            border-radius: 35px;
+            padding: 20px; /* Giảm từ 28px xuống 20px */
+            margin: 25px 0; /* Giảm từ 40px xuống 25px */
+            text-align: center;
+            border: 1px solid #cde0ff;
+            box-shadow: 0 12px 24px #d9eaff;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 28px;
+            box-shadow: 0 20px 30px -8px #0c3a66;
+            border: 3px solid white;
+        }
+        
+        /* Điều chỉnh kích thước cho từng hình */
+        .img-19-1 {
+            max-width: 70% !important;
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .img-19-2 {
+            max-width: 70% !important;
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .img-19-0 {
+            max-width: 85% !important;
+            width: 40%;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .fig-caption {
+            margin-top: 12px; /* Giảm từ 20px xuống 12px */
+            font-weight: 600;
+            color: #0052a3;
+            background: #e7f3ff;
+            display: inline-block;
+            padding: 6px 25px; /* Giảm padding */
+            border-radius: 50px;
+            font-size: 1.1rem; /* Giảm từ 1.2rem */
+        }
+        .formula-box {
+            background: #ecf4ff;
+            padding: 15px 25px; /* Giảm padding */
+            border-radius: 36px;
+            margin: 20px 0; /* Giảm margin */
+            border-left: 14px solid #1a4fd0;
+            font-size: 1.5rem; /* Giảm từ 1.7rem */
+            text-align: center;
+            box-shadow: 0 10px 22px #c7dcff;
+        }
+        .formula {
+            background: white;
+            display: inline-block;
+            padding: 8px 28px; /* Giảm padding */
+            border-radius: 60px;
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-weight: 700;
+            box-shadow: 0 4px 12px #9cb9f0;
+        }
+        .question-box {
+            background: #fffcf0;
+            border-radius: 35px;
+            padding: 20px 30px; /* Giảm padding */
+            margin: 25px 0; /* Giảm margin */
+            border: 2px solid #fad48b;
+            box-shadow: 0 18px 28px -10px #f0b94b;
+        }
+        .question-label {
+            font-size: 1.5rem; /* Giảm từ 1.6rem */
+            font-weight: 700;
+            color: #b45f0a;
+            margin-bottom: 12px; /* Giảm margin-bottom */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Giảm gap */
+        }
+        .answer-box, .proof-box {
+            background: white;
+            border-radius: 28px;
+            padding: 16px 24px; /* Giảm padding */
+            margin: 12px 0; /* Giảm margin */
+            border-left: 8px solid; /* Giảm border-left */
+            font-size: 1.1rem; /* Giảm font-size */
+        }
+        .answer-box {
+            border-left-color: #256ef0;
+        }
+        .proof-box {
+            border-left-color: #0f8866;
+            background: #edfcf6;
+        }
+        .grid-2 {
+            display: flex;
+            gap: 30px; /* Giảm gap */
+            margin: 20px 0; /* Giảm margin */
+        }
+        .col {
+            flex: 1;
+        }
+        hr {
+            border: none;
+            height: 3px; /* Giảm height */
+            background: linear-gradient(90deg, #a8c8ff, #ffffff);
+            margin: 30px 0; /* Giảm margin */
+        }
+        .footnote {
+            background: #01325a;
+            color: white;
+            padding: 20px 30px; /* Giảm padding */
+            border-radius: 50px;
+            margin-top: 30px; /* Giảm margin-top */
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 1.2rem; /* Giảm font-size */
+        }
+        ul {
+            background: #eaf3ff;
+            padding: 20px 35px; /* Giảm padding */
+            border-radius: 45px;
+            list-style-type: none;
+            font-size: 1.2rem; /* Giảm font-size */
+        }
+        ul li {
+            margin-bottom: 8px; /* Giảm margin-bottom */
+            padding-left: 28px; /* Giảm padding-left */
+            position: relative;
+        }
+        ul li::before {
+            content: "✓";
+            color: #1f6ef0;
+            font-weight: bold;
+            font-size: 1.4rem; /* Giảm font-size */
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .math-symbol {
+            font-family: 'Courier New', monospace;
+            background: #edf6ff;
+            padding: 2px 8px; /* Giảm padding */
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 1.1rem; /* Giảm font-size */
+            display: inline-block;
+            margin: 1px 0;
+        }
+        .highlight {
+            background: #fffacd;
+            padding: 3px 8px; /* Giảm padding */
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0; /* Giảm margin */
+            font-size: 1.1rem; /* Giảm font-size */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px #abc0e0;
+        }
+        th {
+            background: #1f4e8a;
+            color: white;
+            padding: 10px 15px; /* Giảm padding */
+            font-weight: 600;
+        }
+        td {
+            background: #f3f9ff;
+            padding: 10px 15px; /* Giảm padding */
+            border-bottom: 1px solid #b8d4ff;
+        }
+        .example-box {
+            background: #e2f0fa;
+            padding: 18px 25px; /* Giảm padding */
+            border-radius: 30px;
+            margin: 18px 0; /* Giảm margin */
+            border-left: 8px solid #1a73e8; /* Giảm border-left */
+        }
+        .example-box h3 {
+            margin-top: 0;
+            margin-bottom: 8px; /* Thêm margin-bottom */
+        }
+        .example-box p {
+            margin: 8px 0; /* Giảm margin */
+        }
+        p {
+            margin: 8px 0; /* Thêm margin cho tất cả các đoạn văn */
+        }
+        @media (max-width: 700px) {
+            .lesson-card { padding: 20px 15px; } /* Giảm padding */
+            h1 { font-size: 2.2rem; }
+            .grid-2 { flex-direction: column; }
+            .img-19-1, .img-19-2, .img-19-0 {
+                max-width: 95% !important;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="lesson-card">
+    <h1>⚡ Bài 19: THẾ NĂNG ĐIỆN</h1>
+    <div class="subhead">Quỹ đạo chuyển động của điện tích q > 0 bay vào điện trường đều theo phương vuông góc với đường sức.</div>
+
+    <!-- HÌNH 19.0 - giảm nhẹ còn 85% -->
+    <div class="image-container">
+        <img src="19.0.png" alt="Hình 19.0 - Chuyển động của điện tích trong điện trường đều" class="img-19-0">
+        <div class="fig-caption">🔹 Hình 19.0: Điện tích dương chuyển động trong điện trường đều (quỹ đạo parabol)</div>
+    </div>
+
+    <h2>I. CÔNG CỦA LỰC ĐIỆN</h2>
+    <p>Một điện tích dương <span class="math-symbol">q</span> dịch chuyển trong điện trường đều từ điểm <span class="math-symbol">M</span> tới điểm <span class="math-symbol">N</span> luôn chịu tác dụng của lực điện không đổi. Công của lực điện làm dịch chuyển điện tích <span class="math-symbol">q</span> từ <span class="math-symbol">M</span> đến <span class="math-symbol">N</span> trong điện trường đều <strong>không phụ thuộc vào hình dạng đường đi</strong>, chỉ phụ thuộc vào vị trí điểm đầu <span class="math-symbol">M</span> và điểm cuối <span class="math-symbol">N</span>.</p>
+
+    <div class="formula-box">
+        <span class="formula">A<sub>MN</sub> = qEd</span>
+    </div>
+    <p>Trong đó: <strong>d</strong> là độ dài đại số của đoạn <span class="math-symbol">MN</span> chiếu lên phương đường sức điện (hình chiếu trên một đường sức).</p>
+
+    <!-- HÌNH 19.1 - giảm còn 70% -->
+    <div class="image-container">
+        <img src="19.1.png" alt="Hình 19.1 - Điện tích q từ M đến N" class="img-19-1">
+        <div class="fig-caption">🔹 Hình 19.1: Điện tích dương <span class="math-symbol">q</span> dịch chuyển từ <span class="math-symbol">M</span> đến <span class="math-symbol">N</span> – công không phụ thuộc đường đi (MN, MPN…)</div>
+    </div>
+
+    <p>Với điện trường bất kì, công của lực điện cũng không phụ thuộc hình dạng đường đi – tính chất của <strong>trường lực thế</strong> (tĩnh điện, trọng lực…). Vì lực điện tỉ lệ với <span class="math-symbol">q</span> nên công cũng tỉ lệ với <span class="math-symbol">q</span>.</p>
+
+    <h2>II. THẾ NĂNG CỦA MỘT ĐIỆN TÍCH TRONG ĐIỆN TRƯỜNG</h2>
+
+    <h3>1. Thế năng của một điện tích trong điện trường đều</h3>
+    <p>Thế năng của điện tích <span class="math-symbol">q</span> tại một điểm trong điện trường đều đặc trưng cho khả năng sinh công của điện trường khi đặt điện tích <span class="math-symbol">q</span> tại điểm đó. Với tụ điện, thường chọn <strong>bản cực âm làm mốc thế năng</strong>.</p>
+
+    <!-- HÌNH 19.2 - giảm còn 70% -->
+    <div class="image-container">
+        <img src="19.2.png" alt="Hình 19.2 - Điện tích trong tụ điện" class="img-19-2">
+        <div class="fig-caption">🔹 Hình 19.2: Điện tích dương <span class="math-symbol">q</span> trong điện trường đều giữa hai bản tụ</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">📌 Câu hỏi 1:</div>
+        <div class="answer-box">
+            <strong>Yêu cầu:</strong> Một điện tích dương <span class="math-symbol">q</span> đặt tại điểm <span class="math-symbol">M</span> trong điện trường đều của tụ điện có độ lớn <span class="math-symbol">E</span>. Chứng minh công mà điện trường có thể sinh ra khi dịch chuyển <span class="math-symbol">q</span> từ <span class="math-symbol">M</span> đến bản cực âm là <span class="math-symbol">A = qEd</span>.
+        </div>
+        <div class="proof-box">
+            <strong>✓ Chứng minh:</strong> Lực điện tác dụng lên <span class="math-symbol">q</span> là <span class="math-symbol">F = qE</span> (cùng chiều <span class="math-symbol">E</span>, hướng từ bản dương sang bản âm). Nếu <span class="math-symbol">q</span> dịch chuyển thẳng từ <span class="math-symbol">M</span> đến bản âm theo phương đường sức, quãng đường <span class="math-symbol">d</span>, công <span class="math-symbol">A = F·d = qE·d</span>. Vì công không phụ thuộc đường đi (tính chất trường thế) nên với mọi đường cong từ <span class="math-symbol">M</span> đến bản âm, công vẫn bằng <span class="math-symbol">qEd</span>.
+        </div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">📌 Câu hỏi 2:</div>
+        <div class="answer-box">
+            <strong>Yêu cầu:</strong> Nhận xét về công <span class="math-symbol">A</span> khi thay <span class="math-symbol">q</span> bằng một điện tích âm.
+        </div>
+        <div class="proof-box">
+            <strong>✓ Nhận xét:</strong> Nếu <span class="math-symbol">q < 0</span>, lực điện <span class="math-symbol">F = qE</span> ngược chiều <span class="math-symbol">E</span>. Khi điện tích âm di chuyển từ <span class="math-symbol">M</span> đến bản âm, lực điện ngược chiều dịch chuyển → công của lực điện là <strong>âm</strong>: <span class="math-symbol">A = -|q|Ed</span>. Điều đó có nghĩa là cần có ngoại lực thực hiện công để đưa điện tích âm về bản âm (lực điện cản trở chuyển động).
+        </div>
+    </div>
+
+    <p>Trong điện trường đều, nếu chọn mốc thế năng tại bản âm, thế năng tại điểm <span class="math-symbol">M</span> cách bản âm khoảng <span class="math-symbol">d</span> là:</p>
+    <div class="formula-box">
+        <span class="formula">W<sub>M</sub> = qEd</span>
+    </div>
+    <p>Với điện trường bất kì, người ta thường chọn mốc ở vô cực (nơi điện trường bằng không).</p>
+
+    <h3>2. Thế năng của một điện tích trong điện trường bất kì</h3>
+    <p>Thế năng của <span class="math-symbol">q</span> tại điểm <span class="math-symbol">M</span> bằng công của lực điện khi dịch chuyển <span class="math-symbol">q</span> từ <span class="math-symbol">M</span> ra vô cực (hoặc đến điểm mốc):</p>
+    <div class="formula-box">
+        <span class="formula">W<sub>M</sub> = A<sub>M∞</sub></span>
+    </div>
+    <p>Vì độ lớn lực điện tỉ lệ với <span class="math-symbol">q</span>, thế năng cũng tỉ lệ với <span class="math-symbol">q</span>: <span class="math-symbol">W<sub>M</sub> = V<sub>M</sub> · q</span>, với <span class="math-symbol">V<sub>M</sub></span> là điện thế tại <span class="math-symbol">M</span> (phụ thuộc điện trường và vị trí, không phụ thuộc <span class="math-symbol">q</span>).</p>
+
+    <hr>
+
+    <h2>📐 CÂU HỎI MỞ RỘNG (TỪ HÌNH ẢNH)</h2>
+
+    <!-- CÂU HỎI 1 ĐÃ ĐƯỢC BỔ SUNG ĐẦY ĐỦ -->
+    <div class="question-box" style="background: #e6f2ff;">
+        <div class="question-label">🔍 Câu hỏi 1 (mở rộng):</div>
+        <div class="answer-box" style="border-left-color: #b45f0a; background: #fff9e6;">
+            <p style="font-size: 1.2rem; font-weight: 600; margin: 5px 0;">"Chứng tỏ rằng, công của lực điện trong sự dịch chuyển của điện tích q từ điểm M đến điểm N sẽ bằng độ giảm thế năng của điện tích q trong điện trường. Hãy mở rộng cho trường hợp M ở xa vô cùng."</p>
+        </div>
+        
+        <div class="proof-box" style="background: #f0f9ff;">
+            <strong>✅ Chứng minh:</strong>
+            
+            <p style="margin-top: 8px;"><strong>a) Trường hợp tổng quát:</strong></p>
+            <ul style="background: none; padding-left: 20px; list-style-type: disc; margin: 5px 0;">
+                <li style="margin-bottom: 3px;">Thế năng tại M: <span class="math-symbol">W<sub>M</sub> = A<sub>M∞</sub></span> (công dịch chuyển q từ M ra vô cùng)</li>
+                <li style="margin-bottom: 3px;">Thế năng tại N: <span class="math-symbol">W<sub>N</sub> = A<sub>N∞</sub></span> (công dịch chuyển q từ N ra vô cùng)</li>
+                <li style="margin-bottom: 3px;">Xét dịch chuyển M → N → ∞: <span class="math-symbol">A<sub>M∞</sub> = A<sub>MN</sub> + A<sub>N∞</sub></span></li>
+            </ul>
+            
+            <p style="margin: 5px 0;">Suy ra:</p>
+            <div class="formula-box" style="margin: 8px 0; padding: 8px;">
+                <span class="formula" style="font-size: 1.3rem;">A<sub>MN</sub> = A<sub>M∞</sub> - A<sub>N∞</sub> = W<sub>M</sub> - W<sub>N</sub></span>
+            </div>
+            <p style="font-size: 1.2rem; font-weight: 600; text-align: center; margin: 5px 0;">⇒ Công của lực điện bằng độ giảm thế năng</p>
+            <div class="formula-box" style="margin: 5px auto; padding: 5px; width: 70%;">
+                <span class="formula">A<sub>MN</sub> = W<sub>M</sub> - W<sub>N</sub> = -ΔW</span>
+            </div>
+
+            <p style="margin-top: 12px;"><strong>b) Mở rộng cho trường hợp M ở xa vô cùng:</strong></p>
+            <p style="margin: 5px 0;">Khi M ở xa vô cùng, thế năng tại M bằng 0 (mốc thế năng): <span class="math-symbol">W<sub>M</sub> = 0</span></p>
+            <p style="margin: 5px 0;">Công dịch chuyển từ vô cùng đến điểm N là:</p>
+            <div class="formula-box" style="margin: 8px 0; padding: 8px;">
+                <span class="formula" style="font-size: 1.3rem;">A<sub>∞N</sub> = W<sub>∞</sub> - W<sub>N</sub> = 0 - W<sub>N</sub> = -W<sub>N</sub></span>
+            </div>
+            <p style="font-size: 1.1rem; margin: 5px 0;">Vậy: <strong>Công để đưa điện tích từ vô cùng về điểm N bằng giá trị âm của thế năng tại N</strong>.</p>
+        </div>
+    </div>
+
+    <!-- Bảng tóm tắt -->
+    <h3 style="margin: 15px 0 8px 0;">📊 Tóm tắt công thức</h3>
+    <table>
+        <tr>
+            <th>Dịch chuyển</th>
+            <th>Công thức</th>
+            <th>Ý nghĩa</th>
+        </tr>
+        <tr>
+            <td>M → N</td>
+            <td><span class="math-symbol">A<sub>MN</sub> = W<sub>M</sub> - W<sub>N</sub></span></td>
+            <td>Công bằng độ giảm thế năng</td>
+        </tr>
+        <tr>
+            <td>∞ → N</td>
+            <td><span class="math-symbol">A<sub>∞N</sub> = -W<sub>N</sub></span></td>
+            <td>Công từ vô cùng về N bằng âm thế năng tại N</td>
+        </tr>
+    </table>
+
+    <!-- Ví dụ minh họa -->
+    <div class="example-box">
+        <h3 style="margin-top: 0; margin-bottom: 8px; color: #0b5392;">📝 Ví dụ minh họa</h3>
+        
+        <p><strong>Ví dụ 1:</strong> Điện tích dương q = 2.10⁻⁶ C đặt trong điện trường đều E = 5000 V/m. Biết thế năng tại M là W<sub>M</sub> = 0,02 J, tại N là W<sub>N</sub> = 0,008 J. Tính công dịch chuyển từ M đến N.</p>
+        <p><strong>Giải:</strong> A<sub>MN</sub> = W<sub>M</sub> - W<sub>N</sub> = 0,02 - 0,008 = <strong>0,012 J</strong></p>
+        
+        <p style="margin-top: 10px;"><strong>Ví dụ 2:</strong> Cũng điện tích trên, tính công dịch chuyển từ vô cùng về N.</p>
+        <p><strong>Giải:</strong> A<sub>∞N</sub> = -W<sub>N</sub> = -0,008 J<br>
+        <span style="background: #fff2b5; padding: 2px 6px; border-radius: 12px; display: inline-block; margin-top: 3px;">Dấu âm cho thấy cần ngoại lực thực hiện công 0,008 J để đưa điện tích từ vô cùng về N</span></p>
+    </div>
+
+    <!-- Câu hỏi 2 từ hình ảnh -->
+    <div class="question-box" style="background: #f5ebff;">
+        <div class="question-label">⚡ Câu hỏi 2 (từ hình ảnh):</div>
+        <div class="answer-box">
+            <p style="font-size: 1.1rem; margin: 5px 0;">"Trong điện trường bất kì, khi chọn mốc là ở xa vô cùng, có trường hợp mà số đo thế năng sẽ có giá trị âm không? Hãy vẽ hình minh họa."</p>
+        </div>
+        <div class="proof-box">
+            <strong>✓ Trả lời:</strong> Có. Khi điện tích thử q < 0 trong điện trường của điện tích dương Q > 0, lực hút sinh công dương khi đưa q từ vô cùng lại gần Q, làm thế năng giảm từ 0 xuống âm.<br>
+            <span class="math-symbol">W<sub>M</sub> = kQq/r &lt; 0</span> (vì q &lt; 0)
+        </div>
+    </div>
+
+    <!-- Hình minh họa câu 2 - giữ nguyên tỷ lệ với 19.0 -->
+    <div class="image-container">
+        <img src="19.0.png" alt="Minh họa thế năng âm" class="img-19-0">
+        <div class="fig-caption">🔹 Hình minh họa: Điện tích âm <span class="math-symbol">q</span> trong trường của điện tích dương <span class="math-symbol">Q</span> (mốc ∞). Thế năng tại <span class="math-symbol">M</span> là <span class="math-symbol">W<sub>M</sub> = kQq/r &lt; 0</span> vì <span class="math-symbol">q &lt; 0</span>.</div>
+    </div>
+
+    <h2 style="margin: 20px 0 10px 0;">✅ EM ĐÃ HỌC</h2>
+    <ul>
+        <li>Công của lực điện không phụ thuộc hình dạng đường đi, chỉ phụ thuộc vị trí đầu và cuối.</li>
+        <li>Thế năng của điện tích <span class="math-symbol">q</span> đặc trưng cho khả năng sinh công của điện trường khi đặt <span class="math-symbol">q</span> tại điểm đó.</li>
+        <li>Điện trường đều: <span class="math-symbol">W<sub>M</sub> = qEd</span>.</li>
+        <li>Điện trường bất kì: <span class="math-symbol">W<sub>M</sub> = A<sub>M0</sub></span> (mốc tại vô cực hoặc bản âm).</li>
+        <li>Công thức liên hệ: <span class="math-symbol">A<sub>MN</sub> = W<sub>M</sub> - W<sub>N</sub></span></li>
+    </ul>
+
+    <h2 style="margin: 20px 0 10px 0;">🚀 EM CÓ THỂ</h2>
+    <div style="background: #e3f0ff; border-radius: 35px; padding: 20px 30px; font-size: 1.2rem;">
+        <p style="margin: 5px 0;">🔹 Xác định thế năng điện của quả cầu tích điện đều trong điện trường đều của Trái Đất.<br>
+        🔹 Xác định công dịch chuyển một điện tích giữa hai điểm trong điện trường đều của Trái Đất.</p>
+    </div>
+
+    <div class="footnote">
+        <span>📘 KẾT NỐI TRI THỨC VỚI CUỘC SỐNG</span>
+        <span style="background: #1d6db0; padding: 8px 25px; border-radius: 50px;">⚡ 19. THẾ NĂNG ĐIỆN</span>
+    </div>
+</div>
+</body>
+</html>
